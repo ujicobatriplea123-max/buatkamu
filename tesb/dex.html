@@ -1,0 +1,645 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Buat Kamu ❤️</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    background:
+        radial-gradient(circle at 20% 20%, #291523, transparent 45%),
+        radial-gradient(circle at 80% 80%, #20152b, transparent 45%),
+        #100d13;
+    color: #fff;
+    font-family: 'DM Sans', sans-serif;
+    overflow-x: hidden;
+}
+
+/* MUSIK */
+
+#musicBtn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 99999;
+    padding: 12px 19px;
+    border-radius: 30px;
+    background: rgba(230,140,172,.13);
+    border: 1px solid #e68cac;
+    color: #efa4bc;
+    font-size: 12px;
+    font-family: inherit;
+    backdrop-filter: blur(10px);
+    cursor: pointer;
+    transition: .3s;
+}
+
+#musicBtn:hover {
+    background: #e68cac;
+    color: #21131a;
+    transform: translateY(-2px);
+}
+
+#musicInfo {
+    position: fixed;
+    top: 65px;
+    right: 20px;
+    z-index: 999;
+    color: #efa4bc;
+    font-size: 10px;
+    opacity: .8;
+    display: none;
+}
+
+/* BACKGROUND HEART */
+
+#hearts {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.heart {
+    position: absolute;
+    bottom: -30px;
+    color: #e98baa;
+    opacity: 0;
+    animation: float 8s linear forwards;
+}
+
+@keyframes float {
+    15% { opacity: .6; }
+    100% {
+        transform: translateY(-110vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* CONTAINER */
+
+.container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 25px 35px;
+    position: relative;
+    z-index: 2;
+}
+
+.card {
+    width: 100%;
+    max-width: 570px;
+    padding: 45px 35px;
+    border: 1px solid #ffffff16;
+    background: rgba(255,255,255,.045);
+    backdrop-filter: blur(15px);
+    border-radius: 22px;
+    text-align: center;
+    box-shadow: 0 20px 80px #0007;
+    animation: appear 1s ease;
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.tag {
+    color: #e99ab5;
+    font-size: 11px;
+    letter-spacing: 4px;
+    margin-bottom: 30px;
+}
+
+h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(35px, 7vw, 53px);
+    font-weight: 500;
+    line-height: 1.2;
+    margin-bottom: 20px;
+}
+
+h1 span {
+    color: #e99ab5;
+    font-style: italic;
+}
+
+.desc {
+    color: #bcb5c0;
+    font-size: 14px;
+    line-height: 1.9;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    font-family: inherit;
+    transition: .3s;
+}
+
+.btn {
+    margin-top: 30px;
+    background: #e68cac;
+    color: #21131a;
+    padding: 14px 27px;
+    border-radius: 40px;
+    font-weight: 600;
+    font-size: 13px;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    background: #f4a8c4;
+}
+
+.heart-icon {
+    font-size: 40px;
+    margin-bottom: 25px;
+    display: block;
+    animation: beat 1.5s infinite;
+}
+
+@keyframes beat {
+    50% { transform: scale(1.15); }
+}
+
+/* MESSAGE */
+
+#message, #last {
+    display: none;
+    text-align: left;
+    margin-top: 35px;
+    animation: appear .9s ease;
+}
+
+.line {
+    width: 45px;
+    height: 2px;
+    background: #e99ab5;
+    margin-bottom: 25px;
+}
+
+.message-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 27px;
+    color: #efa4bc;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+.letter {
+    color: #d2cbd5;
+    font-size: 14px;
+    line-height: 2;
+}
+
+.letter p {
+    margin-bottom: 17px;
+}
+
+.highlight {
+    color: #efa4bc;
+    font-style: italic;
+}
+
+.signature {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    color: #efa4bc;
+    font-size: 21px;
+    margin-top: 25px;
+}
+
+#last {
+    text-align: center;
+}
+
+#last .desc {
+    margin-top: 15px;
+}
+
+.answer {
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.answer button {
+    border: 1px solid #ffffff25;
+    border-radius: 30px;
+    padding: 13px 20px;
+    background: #ffffff0d;
+    color: white;
+}
+
+.answer button:hover {
+    background: #e68cac;
+    color: #21131a;
+}
+
+#result {
+    color: #efa4bc;
+    font-size: 14px;
+    line-height: 1.9;
+    margin-top: 25px;
+}
+
+footer {
+    color: #77707a;
+    font-size: 10px;
+    letter-spacing: 2px;
+    margin-top: 40px;
+    text-align: center;
+}
+
+@media(max-width:480px) {
+    .card {
+        padding: 38px 23px;
+    }
+
+    #musicBtn {
+        top: 12px;
+        right: 12px;
+    }
+
+    #musicInfo {
+        top: 55px;
+        right: 12px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- BACKGROUND MUSIC -->
+<audio id="bgMusic" loop preload="auto">
+    <source src="love.mp3" type="audio/mpeg">
+</audio>
+
+<button id="musicBtn" onclick="toggleMusic()">
+    ♫ Putar Lagu
+</button>
+
+<div id="musicInfo">
+    I Love You 3000 — Stephanie Poetri
+</div>
+
+<div id="hearts"></div>
+
+<div class="container">
+<div class="card">
+
+    <div class="tag">A LITTLE MESSAGE FOR YOU</div>
+
+    <span class="heart-icon">♡</span>
+
+    <h1>
+        aloo pesek, <span>si ngambekan...</span>
+    </h1>
+
+    <p class="desc">
+        Masih ngambek sama aku, ya?
+        Hehehe, udah dong pesek jangan lama-lama dong.
+        Ada sesuatu yang mau aku sampein nih.
+        Baca sebentar ya awas aja kalo ga dibaca😤, cantik. ❤️
+    </p>
+
+    <button class="btn" onclick="openMessage()">
+        Baca dulu ya ❤️
+    </button>
+
+    <!-- SURAT PERMINTAAN MAAF -->
+
+    <div id="message">
+
+        <div class="line"></div>
+
+        <h2 class="message-title">
+            Aku mau minta maaf...
+        </h2>
+
+        <div class="letter">
+
+            <p>
+                Sayanggg, masih marah ya sama aku?
+                Jangan ngambek terus dong, nanti aku bingung
+                harus gimana biar kamu senyum lagi.
+            </p>
+
+            <p>
+                Aku tahu mungkin ada sikap atau perkataan aku
+                yang bikin kamu kesel. Maafin aku yaa.
+                Aku nggak bermaksud bikin mood kamu jadi jelek.
+            </p>
+
+            <p>
+                Sebenernya aku paling ga tega kalau kamu
+                lagi ngambek gara-gara aku.
+                Rasanya pengen langsung bujuk kamu,
+                tapi kadang aku juga bingung harus mulai dari mana.
+            </p>
+
+            <p>
+                Aku kangen kamu yang biasanya cerewet,
+                yang suka cerita ini itu,
+                yang kadang bikin aku geleng-geleng kepala,
+                tapi justru itu yang bikin aku seneng.
+            </p>
+
+            <p>
+                Kalau memang aku salah, bilang yaa.
+                Aku mau dengerin kamu.
+                Jangan dipendem sendiri, aku pengen ngerti
+                apa yang kamu rasain.
+            </p>
+
+            <p>
+                Aku nggak janji bakal selalu sempurna,
+                tapi aku mau belajar supaya ga terus-terusan
+                bikin kamu kesel.
+            </p>
+
+            <p>
+                Jadi, boleh ga aku bujuk kamu sampai
+                kamu senyum lagi?
+                ga harus sekarang juga kok.
+            </p>
+
+            <p class="highlight">
+                Jangan ngambek lama-lama ya, cantik.
+                Aku sayang kamu, banyak-banyak. ❤️
+            </p>
+
+        </div>
+
+        <div class="signature">
+            - Aku, yang masih mau sama kamu.
+        </div>
+
+        <div style="text-align:center">
+            <button class="btn" onclick="openLast()">
+                Satu hal lagi...
+            </button>
+        </div>
+
+    </div>
+
+    <!-- PESAN TERAKHIR -->
+
+    <div id="last">
+
+        <span class="heart-icon">🥺</span>
+
+        <h2 class="message-title">
+            Udah nggak ngambek lagi?
+        </h2>
+
+        <p class="desc">
+            Aku saip bujuk kamu lagi kalau kamu masih
+            kesel sama aku wkwk.
+            Tapi serius, aku pengen kita baik-baik lagi.
+            Kangen kamu yang suka bikin aku senyum.
+        </p>
+
+      <!-- CONTENT 1 END -->
+
+        <div class="answer">
+
+            <button onclick="response(1)">
+                Udah kok, sini peluk ❤️
+            </button>
+
+            <button onclick="response(2)">
+                Masih ngambek nih 😒
+            </button>
+
+        </div>
+
+        <div id="result"></div>
+
+        <!-- CONTENT 1 -->
+         <div class="container-content">
+          <a href="https://wa.me/+6283115893041?text=aloo%20sayangnyaku🫶" class="a-content">
+           <p>COBA TEKAN:D</p>
+          </a>
+
+         </div>
+        <!-- CONTENT 1 END -->
+
+    </div>
+
+    <footer>
+        DIBUAT DENGAN HATI, BUAT KAMU ♡
+    </footer>
+
+</div>
+</div>
+
+<script>
+
+// =============================
+// MUSIK
+// =============================
+
+const music = document.getElementById("bgMusic");
+const musicBtn = document.getElementById("musicBtn");
+const musicInfo = document.getElementById("musicInfo");
+
+let isPlaying = false;
+
+async function toggleMusic() {
+
+    if (!isPlaying) {
+
+        try {
+            await music.play();
+
+            isPlaying = true;
+            musicBtn.innerHTML = "♫ Musik Menyala ♥";
+            musicInfo.style.display = "block";
+
+        } catch (error) {
+            musicBtn.innerHTML = "Coba putar lagi ♫";
+        }
+
+    } else {
+
+        music.pause();
+
+        isPlaying = false;
+        musicBtn.innerHTML = "♫ Putar Lagu";
+        musicInfo.style.display = "none";
+
+    }
+}
+
+// Mulai musik saat surat dibuka
+async function startMusic() {
+
+    if (!isPlaying) {
+
+        try {
+            await music.play();
+
+            isPlaying = true;
+            musicBtn.innerHTML = "♫ Musik Menyala ♥";
+            musicInfo.style.display = "block";
+
+        } catch (error) {
+            // Jika browser menolak autoplay,
+            // pengguna bisa menekan tombol musik.
+        }
+    }
+}
+
+// =============================
+// ANIMASI HATI
+// =============================
+
+function createHeart() {
+
+    const h = document.createElement("div");
+
+    h.className = "heart";
+    h.innerHTML = Math.random() > .5 ? "♥" : "♡";
+
+    h.style.left = Math.random() * 100 + "%";
+    h.style.fontSize = (13 + Math.random() * 18) + "px";
+    h.style.animationDuration = (6 + Math.random() * 5) + "s";
+
+    document.getElementById("hearts").appendChild(h);
+
+    setTimeout(() => h.remove(), 11000);
+}
+
+setInterval(createHeart, 500);
+
+// =============================
+// BUKA SURAT
+// =============================
+
+function openMessage() {
+
+    document.getElementById("message").style.display = "block";
+
+    document.querySelector(".container > .card > .btn").style.display = "none";
+
+    startMusic();
+
+    document.getElementById("message").scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
+}
+
+// =============================
+// PESAN TERAKHIR
+// =============================
+
+function openLast() {
+
+    document.getElementById("last").style.display = "block";
+
+    document.getElementById("last").scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+    });
+}
+
+// =============================
+// RESPONS TOMBOL
+// =============================
+
+function response(n) {
+
+    const result = document.getElementById("result");
+
+    if(n === 1) {
+
+        result.innerHTML = `
+            <h2 style="margin-bottom:12px;">
+                YEAYYY! ❤️
+            </h2>
+            Makasih ya udah mau kasih aku kesempatan.
+            Sini peluk dulu yang lamaaa.
+            Aku sayang kamu! 🥹
+        `;
+
+        celebrate();
+
+    } else {
+
+        result.innerHTML = `
+            Yahhh, masih ngambek ternyata wkwk.
+            Yaudah, aku bujuk lagi deh.
+            Tapi jangan lupa, ada cowok di sini
+            yang sayang banget sama kamu. ❤️
+        `;
+
+    }
+}
+
+// =============================
+// HUJAN HATI
+// =============================
+
+function celebrate() {
+
+    for(let i = 0; i < 45; i++) {
+
+        setTimeout(() => {
+
+            const h = document.createElement("div");
+
+            h.innerHTML = "❤️";
+            h.style.position = "fixed";
+            h.style.left = Math.random() * 100 + "vw";
+            h.style.top = "-30px";
+            h.style.fontSize = (15 + Math.random() * 20) + "px";
+            h.style.zIndex = "9999";
+            h.style.pointerEvents = "none";
+            h.style.transition = "transform 3s linear, opacity 3s";
+
+            document.body.appendChild(h);
+
+            setTimeout(() => {
+
+                h.style.transform = "translateY(110vh) rotate(360deg)";
+                h.style.opacity = "0";
+
+            }, 50);
+
+            setTimeout(() => h.remove(), 3100);
+
+        }, i * 80);
+
+    }
+}
+
+</script>
+
+</body>
+</html>
